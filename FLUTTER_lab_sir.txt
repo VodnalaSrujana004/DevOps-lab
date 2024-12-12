@@ -112,7 +112,7 @@ class WidgetDemo extends StatelessWidget {
 
             const Image(
               image: NetworkImage(
-                'http://jntuhcers.in/resp/images_new/jntuhlogo.png',
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEDzpa1yYhdV22w7PcFr7hSn4uoy6IxfLrsw&s',
               ),
               height: 100,
             ),
