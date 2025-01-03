@@ -1,0 +1,247 @@
+##1
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Event Registration</title>
+<style>
+    body{font-family:sans-serif;background:#f4f4f9;margin:0;padding:0}
+    .container{width:50%;margin:50px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,.1)}
+    input,select,button{width:100%;padding:10px;margin:5px 0;border:1px solid #ccc;border-radius:5px}
+    button{background:#4CAF50;color:white;border:none;cursor:pointer}
+    button:hover{background:#45a049}
+</style>
+
+</head>
+<body>
+<div class="container">
+<h2>Event Registration</h2>
+<form onsubmit="event.preventDefault(); validateForm()">
+<input type="text" id="name" placeholder="Full Name" required><br>
+<input type="email" id="email" placeholder="Email" required><br>
+<input type="tel" id="phone" placeholder="Phone" required><br>
+<select id="event" required><option value="">Select Event</option><option value="coding">Coding Workshop</option><option value="art">Art Class</option><option value="music">Music Concert</option></select><br>
+<button type="submit">Register</button>
+</form>
+</div>
+<script>
+function validateForm() {
+  let valid = true; ['name', 'email', 'phone', 'event'].forEach(id => { 
+    if (!document.getElementById(id).value) { alert(id + ' is required'); valid = false; }
+  });
+  if (valid) alert('Registration successful!');
+}
+</script>
+</body>
+</html>
+
+-------------------------------------------------------------------------------------------------------------------------
+##2
+Here’s a simplified, easy-to-remember version of the Git and GitHub key concepts:
+
+### Git
+1. **Version Control**: Tracks changes, lets you revert or revisit older versions.
+2. **Branching/Merging**: Work on separate branches, merge later.
+3. **Distributed**: Everyone gets a full copy of the repo for offline work.
+4. **Efficient**: Uses compression and deduplication.
+5. **Fast**: Quick commits, diffs, merges.
+
+### GitHub
+1. **Remote Hosting**: Stores repositories online.
+2. **Collaboration**:
+   - **Pull Requests**: Review/merge code.
+   - **Issues**: Track tasks.
+3. **Docs**: Markdown support for README/wiki.
+4. **Project Management**: Kanban, milestones, labels.
+5. **Social**: Fork, star repositories.
+6. **Integrations**: CI/CD, tools, and analytics.
+7. **Community**: Open-source ecosystem.
+
+---
+
+### Git Basics
+
+1. **Initialize Repo**:  
+   `git init`
+2. **Clone Repo**:  
+   `git clone <url>`
+3. **Check Status**:  
+   `git status`
+4. **Track File**:  
+   `git add <file>`  
+   `git add .` (all files)
+5. **Commit Changes**:  
+   `git commit -m "Message"`
+6. **View History**:  
+   `git log`
+
+---
+
+### Branch Management
+1. **Create Branch**:  
+   `git branch <branch-name>`
+2. **Switch Branch**:  
+   `git checkout <branch-name>`
+3. **Create & Switch Branch**:  
+   `git checkout -b <branch-name>`
+4. **Merge Branch**:  
+   `git merge <branch-name>`
+5. **Delete Branch**:  
+   `git branch -d <branch-name>`
+
+---
+
+### Remote Repos
+1. **Add Remote**:  
+   `git remote add origin <url>`
+2. **View Remotes**:  
+   `git remote -v`
+3. **Push Changes**:  
+   `git push origin <branch-name>`
+4. **Pull Changes**:  
+   `git pull origin <branch-name>`
+5. **Fetch Changes**:  
+   `git fetch origin`
+
+This version provides all the core commands and concepts in a concise, easy-to-remember format.
+----------------------------------------------------------------------------------------------------------------------------------------
+
+##3
+Here's a simplified, easy-to-remember version of the Git setup, management, and pushing changes to GitHub:
+
+### **Step 1: Install Git**
+- **Update package list**:  
+  `sudo apt update`
+- **Install Git**:  
+  `sudo apt install git`
+- **Verify installation**:  
+  `git --version`
+
+### **Step 2: Configure Git**
+- **Set username and email**:  
+  `git config --global user.name "your username"`  
+  `git config --global user.email "your email"`
+- **Check configuration**:  
+  `git config --list`
+
+### **Step 3: Create a Folder**
+- **Check current directory**:  
+  `pwd`
+- **Create a new folder**:  
+  `mkdir <foldername>`
+- **Navigate into the folder**:  
+  `cd <foldername>`
+
+### **Step 4: Clone the Repository**
+- **Clone the remote repository**:  
+  `git clone <repo link>`
+- **List contents**:  
+  `ls`
+- **Navigate into the cloned repo folder**:  
+  `cd <repo-folder-name>`
+
+### **Step 5: Create the HTML File**
+- **Create HTML file**:  
+  `touch index.html`
+- **Open file in text editor**:  
+  `gedit index.html`
+  - Paste the event registration form code and save.
+
+### **Step 6: Push Changes to GitHub**
+- **Check repository status**:  
+  `git status`
+- **Stage the HTML file**:  
+  `git add index.html`
+- **Commit changes**:  
+  `git commit -m "Add event registration form HTML file"`
+- **Push to remote repository**:  
+  `git push origin main`
+
+This shortcut breakdown provides all the necessary commands for setting up Git, managing a repository, and pushing changes to GitHub.
+------------------------------------------------------------------------------------------------------------------------------------------
+##4
+Here’s a concise, easy-to-remember guide for installing and setting up Jenkins:
+
+### **Jenkins Overview**
+- **Automation**: Automates tasks like building, testing, and deploying.
+- **Extensibility**: Supports many plugins for integration (Git, Docker, etc.).
+- **CI/CD**: Facilitates Continuous Integration and Continuous Delivery.
+- **Scalability**: Can run distributed builds across multiple nodes.
+- **Flexibility**: Works with various languages and build tools.
+
+### **Step 1: Install Jenkins**
+1. **Install OpenJDK**:
+   ```bash
+   sudo apt install openjdk-21-jdk
+   ```
+   
+2. **Add Jenkins key**:
+   ```bash
+   sudo wget -O /usr/share/keyrings/jenkins-keyring.asc https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+   ```
+   
+3. **Add Jenkins repository**:
+   ```bash
+   echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+   ```
+
+4. **Update package list**:
+   ```bash
+   sudo apt-get update
+   ```
+
+5. **Install required dependencies**:
+   ```bash
+   sudo apt-get install fontconfig openjdk-17-jre
+   ```
+
+6. **Install Jenkins**:
+   ```bash
+   sudo apt-get install jenkins
+   ```
+
+7. **Check Jenkins status**:
+   ```bash
+   sudo systemctl status jenkins
+   ```
+
+### **Step 2: Access Jenkins**
+- Open browser and navigate to:  
+  `http://localhost:8080`
+
+### **Step 3: Install Suggested Plugins**
+- Click **"Install Suggested Plugins"** and wait for it to complete (green ticks will appear).
+
+### **Step 4: Skip Initial Setup**
+- After plugin installation, click **"Skip"** and continue as Admin.
+
+### **Step 5: Create User**
+1. Go to **Manage Jenkins** > **Manage Users** > **Create User**.
+2. Enter user credentials (Username, Password, etc.) and save.
+3. Use these credentials for future logins.
+
+### **Note**:  
+Remember your **Admin** and **User** credentials for future logins.
+--------------------------------------------------------------------------------------------------------------------------
+
+##5
+5.Demonstrate continuous integration and development using
+Jenkins.
+Step 1 :- copy the github url
+Step 2 :- Go the Google chrome and search for localhost:8080 .The below page will
+appear
+Step 3 :- Select new item and give one name for new item like Mounika (your wish).
+select Freestyle project and click ok.
+Next you will see the below figure:
+scroll up to see Git and click on it, paste your java git url in the box shown as below:
+Step 4 :- In branches the name should be */main
+Step 5 :- Go to build steps : select Execute windows batch command ,enter compilation
+and run commands as shown in below figure:
+save and the below figure will appear:
+see at the left of the image, your build is setting up to ready (build history)
+Step 6 :- click on sep6,2024 current date with time
+on left side click on console output and your output will be shown like this:
+The Hello world is displayed.
+-------------------------------------------------------------------------------------------------------------------------------
+
+##6
