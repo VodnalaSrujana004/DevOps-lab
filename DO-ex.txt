@@ -360,3 +360,80 @@ sudo docker logs mycontainer
 This will display:
 Hello, World!
 -------------------------------------------------------------------------------
+##8p
+### Exact Commands in Order:  
+
+1. **Start Minikube:**  
+   ```
+   minikube start --driver=docker
+   ```  
+   or  
+   ```
+   minikube start
+   ```  
+
+2. **Check Minikube Status:**  
+   ```
+   minikube status
+   ```  
+
+3. **View Cluster Info:**  
+   ```
+   kubectl cluster-info
+   ```  
+
+4. **List Pods:**  
+   ```
+   kubectl get pods
+   ```  
+
+5. **Create Deployment:**  
+   ```
+   kubectl create deployment vyshnavi --image=nginx
+   ```  
+
+6. **Expose Deployment as a Service:**  
+   ```
+   kubectl expose deployment vyshnavi --type=NodePort --port=80
+   ```  
+
+7. **Verify Pods Running Status:**  
+   ```
+   kubectl get pods
+   ```  
+
+8. **Access Service via URL:**  
+   ```
+   minikube service vyshnavi --url
+   ```  
+
+9. **Access Dashboard:**  
+   ```
+   minikube dashboard
+   ```  
+
+10. **Stop Minikube:**  
+    ```
+    minikube stop
+    ```  
+
+### Additional Commands:  
+- **Delete a Pod:**  
+  ```
+  kubectl delete pod <pod-name>
+  ```  
+
+- **List Deployments:**  
+  ```
+  kubectl get deployments
+  ```  
+
+- **List Services:**  
+  ```
+  kubectl get services
+  ```  
+
+- **Delete Deployment:**  
+  ```
+  kubectl delete deployment <deployment-name>
+  ```
