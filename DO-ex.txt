@@ -244,4 +244,119 @@ on left side click on console output and your output will be shown like this:
 The Hello world is displayed.
 -------------------------------------------------------------------------------------------------------------------------------
 
+##10
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        // Set up WebDriver and launch the browser
+        System.out.println("Starting the Selenium program...");
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            // Navigate to Google
+            driver.get("https://www.google.com");
+            System.out.println("Opened Google homepage.");
+
+            // Find the search bar using its name attribute and enter a query
+            WebElement searchBox = driver.findElement(By.name("q"));
+            searchBox.sendKeys("Selenium WebDriver tutorial");
+
+            // Submit the search form
+            searchBox.submit();
+            System.out.println("Performed search operation.");
+
+            // Wait for a moment to let the page load
+            Thread.sleep(2000); // This is a basic wait, consider using WebDriverWait for better handling
+
+            // Get and print the title of the results page
+            String pageTitle = driver.getTitle();
+            System.out.println("Title of the results page: " + pageTitle);
+
+        } finally {
+            // Close the browser
+            driver.quit();
+            System.out.println("Browser closed. Program completed.");
+        }
+    }
+}
+
+
+javac -cp ".;lib/*" Main.java
+
+java -cp ".;lib/*" Main
+--------------------------------------------------------------------------------------------------------------
+##11
+
+const { Builder, By, Key } = require('selenium-webdriver');
+
+async function example() {
+    let driver = await new Builder().forBrowser('chrome').build();
+    try {
+        await driver.get('https://www.google.com');
+        let searchBox = await driver.findElement(By.name('q'));
+        await searchBox.sendKeys('Selenium WebDriver', Key.RETURN);
+    } finally {
+        await driver.quit();
+    }
+}
+
+example();
+
+npm init -y
+npm install selenium-webdriver chromedriver
+node test.js
+-------------------------------------------------------------------------------------------------------------
 ##6
+1) docker --version
+2) sudo docker login
+3) sudo docker login -u <username>
+4) sudo docker pull mysql 
+5) sudo docker run --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql 
+6) sudo docker ps -a
+7) sudo docker ps
+8) sudo docker stop <container_id or container name>
+9) sudo docker rm <container_id or container name>
+10) sudo docker rmi mysql
+
+---------------------------------------------------------------------------------
+##7
+1.Write the Java Application
+Create a file named hi.java with the following content:
+public class hi {
+public static void main(String[] args) { System.out.println("Hello, World!");
+}
+}
+2.Create the Dockerfile
+In the same directory as the hi.java file, create a file named Dockerfile with the
+following content:
+# Use the official OpenJDK image as the base image
+FROM openjdk:latest # Set the working directory inside the container WORKDIR /app
+# Copy the Java application into the container
+COPY . /app
+# Compile the Java application
+RUN javac hi.java
+# Command to run the Java application
+CMD ["java", "hi"]
+3.Build the Docker Image
+Run the following command in the terminal (ensure you're in the same directory as the
+Dockerfile):
+sudo docker build -t myimage .
+• docker build: Builds a Docker image.
+• -t myimage: Tags the image with the name myimage. “.” Specifies the current
+directory as the build context.
+4.Run the Docker Container
+Start a new container using the image you just built:
+sudo docker run --name mycontainer myimage
+• --name mycontainer: Names the container mycontainer. myimage: Specifies the
+image to use for the container
+5.Verify the Output
+To view the output of the container, use:
+sudo docker logs mycontainer
+This will display:
+Hello, World!
+-------------------------------------------------------------------------------
