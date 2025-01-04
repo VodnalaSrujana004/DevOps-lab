@@ -1,0 +1,392 @@
+1) a) Set up navigation between different screens using Navigator.
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: FirstPage(),
+    ));
+class FirstPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text("First Page")),
+        body: Center(
+          child: ElevatedButton(
+            child: Text("Click here to navigate"),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondPage()),
+            ),
+          ),
+        ),
+      );
+}
+class SecondPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text("Second Page")),
+        body: Center(
+          child: Text(
+            "I am in second Page",
+            style: TextStyle(color: Colors.purple, fontSize: 20),
+          ),
+        ),
+      );
+}
+---------------------------------------------------------------------------------------------------------------------------------
+1. b) Implement navigation with named routers
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/screen1': (context) => Screen('Screen 1'),
+        '/screen2': (context) => Screen('Screen 2'),
+      },
+    ));
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text('Home Page')),
+        body: Center(  // Wrap the Column with Center to align the buttons
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(onPressed: () => Navigator.pushNamed(context, '/screen1'), child: Text('Go to Screen 1')),
+              ElevatedButton(onPressed: () => Navigator.pushNamed(context, '/screen2'), child: Text('Go to Screen 2')),
+            ],
+          ),
+        ),
+      );
+}
+class Screen extends StatelessWidget {
+  final String title;
+  Screen(this.title);
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text(title)),
+        body: Center(child: ElevatedButton(onPressed: () => Navigator.pop(context), child: Text('Back to Home'))),
+      );
+}
+---------------------------------------------------------------------------------------------------------------------------------------
+2) a) Implement slider widget to change the value of setsate.
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: SliderExample()));
+class SliderExample extends StatefulWidget {
+  @override
+  _SliderExampleState createState() => _SliderExampleState();
+}
+class _SliderExampleState extends State<SliderExample> {
+  double value = 20;
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text('Slider')),
+        body: Slider(
+          value: value,
+          max: 100,
+          divisions: 5,
+          label: value.round().toString(),
+          onChanged: (v) => setState(() => value = v),
+        ),
+      );
+}
+-----------------------------------------------------------------------------------------------------------------------------------------
+3) Implement form validation and error handling.
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: Scaffold(
+  appBar: AppBar(title: Text('Validation Form')),
+  body: ValidationForm(),
+)));
+class ValidationForm extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            TextFormField(decoration: InputDecoration(labelText: 'Name'), validator: (value) => value!.isEmpty ? 'Enter name' : null),
+            TextFormField(decoration: InputDecoration(labelText: 'Email'), validator: (value) => value!.contains('@') ? null : 'Enter valid email'),
+            TextFormField(decoration: InputDecoration(labelText: 'Password'), obscureText: true, validator: (value) => value!.length < 6 ? 'Min 6 chars' : null),
+            ElevatedButton(
+              onPressed: () {
+                if (_formKey.currentState!.validate())
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Form Valid')));
+              },
+              child: Text('Submit'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+4) Stateless Widget
+import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Stateless Widget Example')),
+        body: Center(
+          child: Text('Hello, Stateless Widget!'),
+        ),
+      ),
+    );
+   }
+  }
+---------------------------------------------------------------------- 
+5. Stateful Widget
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: CounterApp()));
+class CounterApp extends StatefulWidget {
+  @override
+  _CounterAppState createState() => _CounterAppState();
+}
+class _CounterAppState extends State<CounterApp> {
+  int _counter = 0;
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text('Counter')),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Stateful Widget Button pressed:'),
+              Text('$_counter', style: Theme.of(context).textTheme.headlineMedium),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => setState(() => _counter++),
+          child: Icon(Icons.add),
+        ),
+      );
+}
+----------------------------------------------------------------------------------------------------------------------------
+6) Implement  a TapBar
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: TabBarExample()));
+class TabBarExample extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text('TabBar Example'),
+            bottom: TabBar(tabs: [
+              Tab(icon: Icon(Icons.cloud_outlined)),
+              Tab(icon: Icon(Icons.beach_access_sharp)),
+              Tab(icon: Icon(Icons.brightness_5_sharp)),
+            ]),
+          ),
+          body: TabBarView(children: [
+            Center(child: Text("It's cloudy here")),
+            Center(child: Text("It's rainy here")),
+            Center(child: Text("It's sunny here")),
+          ]),
+        ),
+      );
+}
+---------------------------------------------------------------------------------------------------------------------------
+7) Design a Flutter Switch widget
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: SwitchApp()));
+class SwitchApp extends StatefulWidget {
+  @override
+  _SwitchAppState createState() => _SwitchAppState();
+}
+class _SwitchAppState extends State<SwitchApp> {
+  bool isOn = true;
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(title: Text('Switch Example')),
+        body: Center(
+          child: Switch(
+            value: isOn,
+            activeColor: Colors.red,
+            onChanged: (val) => setState(() => isOn = val),
+          ),
+        ),
+      );
+}
+--------------------------------------------------------------------------------------------------------------------------
+8) Experiment with different types of animations (fade, slide)
+import 'package:flutter/material.dart';
+import 'dart:math';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: AnimationDemo(),
+    );
+  }
+}
+class AnimationDemo extends StatefulWidget {
+  @override
+  _AnimationDemoState createState() => _AnimationDemoState();
+}
+class _AnimationDemoState extends State<AnimationDemo> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Offset> _slideAnimation;
+  late Animation<double> _rotationAnimation;
+  bool _visible = true;
+  bool _isLarge = false;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: Duration(seconds: 2),
+      vsync: this,
+    );
+    _slideAnimation = Tween<Offset>(begin: Offset(0.0, 1.0), end: Offset(0.0, 0.0)).animate(_controller);
+    _rotationAnimation = Tween<double>(begin: 0, end: 2 * pi).animate(_controller);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Combined Animation Demo')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _visible = !_visible;
+                    });
+                  },
+                  child: Text('Fade Animation'),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    _controller.forward(from: 0.0);
+                  },
+                  child: Text('Slide Animation'),
+                ),
+                SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _isLarge = !_isLarge;
+                    });
+                  },
+                  child: Text('Scale Animation'),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            AnimatedOpacity(
+              opacity: _visible ? 1.0 : 0.0,
+              duration: Duration(seconds: 2),
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.blue,
+                child: Center(child: Text('Fade In/Out', style: TextStyle(color: Colors.white))),
+              ),
+            ),
+            SizedBox(height: 20),
+            SlideTransition(
+              position: _slideAnimation,
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.green,
+                child: Center(child: Text('Slide Up', style: TextStyle(color: Colors.white))),
+              ),
+            ),
+            SizedBox(height: 20),
+            AnimatedScale(
+              scale: _isLarge ? 1.5 : 1.0,
+              duration: Duration(seconds: 1),
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.red,
+                child: Center(child: Text('Scale Up/Down', style: TextStyle(color: Colors.white))),
+              ),
+            ),
+            SizedBox(height: 20),
+            AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return Transform.rotate(
+                  angle: _rotationAnimation.value,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.purple,
+                    child: Center(child: Text('Rotate', style: TextStyle(color: Colors.white))),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+-------------------------------------------------------------------------------------------------------------------------------------
+9) list view 
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(
+  home: Scaffold(
+    appBar: AppBar(title: Text('Basic List')),
+    body: ListView(
+      children: const [
+        ListTile(leading: Icon(Icons.map), title: Text('Map')),
+        ListTile(leading: Icon(Icons.photo_album), title: Text('Album')),
+        ListTile(leading: Icon(Icons.phone), title: Text('Phone')),
+      ],
+    ),
+  ),
+));
+-----------------------------------------------------------------------------------------------------------------------------------
+10) grid view 
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MaterialApp(
+    home: Scaffold(
+      appBar: AppBar(title: Text('Grid List')),
+      body: GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemCount: 100,
+        itemBuilder: (context, index) => Center(child: Text('Item $index')),
+      ),
+    ),
+  ));
+}
+---------------------------------------------------------------------------------------------------------------------------------
+11) image upload through internet
+import 'package:flutter/material.dart';
+void main() => runApp(MaterialApp(home: Scaffold(
+  appBar: AppBar(title: Text('Fetch Image from Internet')),
+  body: Center(child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.network('https://jntuhcej.ac.in/images/Acad_Block.JPG'),
+      SizedBox(height: 20),
+      Text('JNTUH Academic Block'),
+    ],
+  )),
+)));
+
+----------------------------------------------------------------------------------------------------------------------------
+
